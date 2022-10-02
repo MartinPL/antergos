@@ -51,3 +51,7 @@ nosetests.xml
 #*.doctree
 site/
 docs/_build
+
+# Build / makepkg
+pkg
+cnchi-1-1-any.pkg.tar.zst

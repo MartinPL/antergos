@@ -1,0 +1,5 @@
+pylint:
+  disable:
+    - undefined-variable
+python-targets:
+    - 3

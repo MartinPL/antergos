@@ -1,0 +1,68 @@
+# Arch packages
+arch-install-scripts
+archlinux-keyring
+btrfs-progs
+cowsay
+curl
+curl
+dosfstools
+edk2-shell
+gtkmm3
+f2fs-tools
+linux
+linux-firmware
+memtest86+
+mkinitcpio
+mkinitcpio-archiso
+networkmanager
+openbsd-netcat
+openssh
+pacman-contrib
+reflector
+syslinux
+systemd-sysvcompat
+tree
+virtualbox-guest-utils
+open-vm-tools
+xfsprogs
+zsh
+
+# Fonts
+noto-fonts
+noto-fonts-emoji
+noto-fonts-extra
+noto-fonts-cjk
+
+# Networking
+openvpn
+wireguard-tools
+
+# GUI Target
+firefox
+gdm
+onyx
+gparted
+mesa
+spice-vdagent
+xorg
+pipewire
+pipewire-pulse
+
+# Things we're hosting
+base
+filesystem
+grub
+lsb-release
+neofetch
+sudo
+
+# Our packages
+crystal-wallpapers
+crystal-mirrorlist
+crystal-keyring
+jade
+jade-gui
+
+# Text editors
+nano
+vim

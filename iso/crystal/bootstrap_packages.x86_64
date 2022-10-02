@@ -1,0 +1,22 @@
+# Arch packages
+cowsay
+curl
+openbsd-netcat
+openssh
+pacman-contrib
+reflector
+tree
+zsh
+
+# Things we're hosting
+base
+filesystem
+lsb-release
+neofetch
+pfetch
+sudo
+
+# Text editors
+micro
+nano
+vim

@@ -9,11 +9,11 @@ else
 fi
 if [[ "$1" == "--build-iso" ]]; then
     cp chrooted-iso.sh chrooted.sh
-    MKARCHISO_FLAGS="-v -w $WORKDIR -o . crystal"
+    MKARCHISO_FLAGS="-v -w $WORKDIR -o . antergos"
     rm -fv *.iso
 elif [[ "$1" == "--build-bootstrap" ]]; then
     cp chrooted-bootstrap.sh chrooted.sh
-    MKARCHISO_FLAGS="-m bootstrap -v -w $WORKDIR -o . crystal"
+    MKARCHISO_FLAGS="-m bootstrap -v -w $WORKDIR -o . antergos"
     rm -fv *.tar.gz
 else
    RESULTCODE=0
@@ -24,14 +24,14 @@ else
         echo "option '$1' not known, available options are:"
         RESULTCODE=1
     fi
-    echo "--build-iso		builds a crystal linux iso"
-    echo "--build-bootstrap	builds a crystal linux rootfs tarball"
+    echo "--build-iso		builds a antergos linux iso"
+    echo "--build-bootstrap	builds a antergos linux rootfs tarball"
     echo "--help			display this message"
     exit $RESULTCODE
 fi
-cp crystal/pacman.conf crystal/airootfs/etc/.
+cp antergos/pacman.conf antergos/airootfs/etc/.
 
-echo "Built on $(date +"%D @ %T EST")" > crystal/airootfs/etc/buildstamp
+echo "Built on $(date +"%D @ %T EST")" > antergos/airootfs/etc/buildstamp
 
 time sudo ./mkarchiso $MKARCHISO_FLAGS
 

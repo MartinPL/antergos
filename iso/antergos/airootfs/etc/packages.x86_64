@@ -32,19 +32,5 @@ firefox
 arch-install-scripts
 base
 filesystem
-neofetch
-pfetch
 grub
 
-# Our in-house
-jade-gui
-jade
-onyx
-ame
-
-crystal-wallpapers
-
-# Text editors (issue #2)
-nano
-micro
-vim

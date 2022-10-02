@@ -1,5 +1,5 @@
 *.iso
 *.tar.gz
-crystal/airootfs/etc/pacman.conf
-crystal/airootfs/etc/buildstamp
+antergos/airootfs/etc/pacman.conf
+antergos/airootfs/etc/buildstamp
 chrooted.sh

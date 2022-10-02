@@ -12,11 +12,4 @@ zsh
 base
 filesystem
 lsb-release
-neofetch
-pfetch
 sudo
-
-# Text editors
-micro
-nano
-vim

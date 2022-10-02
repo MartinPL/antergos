@@ -40,7 +40,6 @@ wireguard-tools
 # GUI Target
 firefox
 gdm
-onyx
 gparted
 mesa
 spice-vdagent
@@ -53,16 +52,5 @@ base
 filesystem
 grub
 lsb-release
-neofetch
 sudo
 
-# Our packages
-crystal-wallpapers
-crystal-mirrorlist
-crystal-keyring
-jade
-jade-gui
-
-# Text editors
-nano
-vim

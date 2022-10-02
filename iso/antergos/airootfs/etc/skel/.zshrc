@@ -2,7 +2,7 @@ PROMPT="%n@%m %~ %# "
 
 credentials() {
   echo "Live Credentials -"
-  echo "crystal: crystal // root: crystal"
+  echo "antergos: antergos // root: antergos"
   echo
 }
 

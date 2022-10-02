@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="crystal-live"
-iso_label="CRYS_$(date +'%Y-%m-%d')"
-iso_publisher="Crystal Linux <https://getcryst.al>"
-iso_application="Crystal Linux Live"
+iso_name="antergos"
+iso_label="ARCH_$(date +'%Y-%m-%d')"
+iso_publisher="Antergos <https://github.com/MartinPL/antergos>"
+iso_application="Antergos Live"
 iso_version="$(date +'%Y-%m-%d')"
 install_dir="arch"
 bootmodes=('bios.syslinux.mbr' 'bios.syslinux.eltorito' 'uefi-x64.systemd-boot.esp' 'uefi-x64.systemd-boot.eltorito')

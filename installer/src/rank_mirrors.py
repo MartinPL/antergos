@@ -57,25 +57,15 @@ except NameError as err:
 class RankMirrors(multiprocessing.Process):
     """ Process class that downloads and sorts the mirrorlist """
 
-    REPOSITORIES = ['arch', 'antergos']
-    MIRROR_OK_RSS = 'Alert Details: Successful response received'
+    REPOSITORIES = ['arch']
 
-    MIRROR_STATUS = {
-        'antergos': 'http://rss.uptimerobot.com/u600152-d6c3c10d099982e3a185c2c5ce561a7b',
-        'arch': 'http://www.archlinux.org/mirrors/status/json/'}
+    MIRROR_STATUS = {'arch': 'http://www.archlinux.org/mirrors/status/json/'}
 
-    MIRRORLIST = {
-        'antergos': '/etc/pacman.d/antergos-mirrorlist',
-        'arch': '/etc/pacman.d/mirrorlist'}
+    MIRRORLIST = {'arch': '/etc/pacman.d/mirrorlist'}
 
-    MIRRORLIST_URL = {
-        'arch': "https://www.archlinux.org/mirrorlist/all/",
-        'antergos': ("https://raw.githubusercontent.com/Antergos/antergos-packages/master/"
-                     "antergos/antergos-mirrorlist/antergos-mirrorlist")}
+    MIRRORLIST_URL = {'arch': "https://www.archlinux.org/mirrorlist/all/"}
 
-    DB_SUBPATHS = {
-        'arch': 'core/os/x86_64/{0}-{1}-x86_64.pkg.tar.xz',
-        'antergos': '/{0}-{1}-any.pkg.tar.xz'}
+    DB_SUBPATHS = {'arch': 'core/os/x86_64/{0}-{1}-x86_64.pkg.tar.xz'}
 
     def __init__(self, fraction_pipe, settings):
         """ Initialize process class
@@ -84,16 +74,12 @@ class RankMirrors(multiprocessing.Process):
         super(RankMirrors, self).__init__()
         self.settings = settings
         self.fraction_pipe = fraction_pipe
-        # Antergos mirrors info is returned as RSS, arch's as JSON
-        self.data = {'arch': {}, 'antergos': {}}
-        self.mirrorlist_ranked = {'arch': [], 'antergos': []}
+        self.data = {'arch': {}}
+        self.mirrorlist_ranked = {'arch': []}
 
     @staticmethod
     def is_good_mirror(mirror):
         """ Check if mirror info is good enough """
-        if 'summary' in mirror.keys():
-            # RSS antergos status mirror
-            return bool(mirror['summary'] == RankMirrors.MIRROR_OK_RSS)
 
         # JSON arch status mirror
         return (mirror['last_sync'] and
@@ -102,7 +88,7 @@ class RankMirrors(multiprocessing.Process):
                 int(mirror['delay']) <= 3600)
 
     def get_mirror_stats(self):
-        """ Retrieve all mirrors status RSS data. """
+        """ Retrieve all mirrors status data. """
         # Load status data (JSON) for arch mirrors
         if not self.data['arch']:
             try:
@@ -115,12 +101,7 @@ class RankMirrors(multiprocessing.Process):
                 logging.warning(
                     'Failed to retrieve mirror status information: %s', err)
 
-        # Load status data (RSS) for antergos mirrors
-        if not self.data['antergos']:
-            self.data['antergos'] = feedparser.parse(
-                RankMirrors.MIRROR_STATUS['antergos'])
-
-        mirrors = {'arch': [], 'antergos': []}
+        mirrors = {'arch': []}
 
         try:
             # Filter incomplete mirrors and mirrors that haven't synced.
@@ -130,30 +111,7 @@ class RankMirrors(multiprocessing.Process):
         except KeyError as err:
             logging.warning('Failed to parse retrieved mirror data: %s', err)
 
-        mirror_urls = []
-        for mirror in self.data['antergos']['entries']:
-            title = mirror['title']
-            if "is UP" in title:
-                # In RSS, all mirrors are in http:// format, we prefer https://
-                mirror['url'] = mirror['link'].replace('http://', 'https://')
-                if mirror['url'] not in mirror_urls:
-                    mirrors['antergos'].append(mirror)
-                    mirror_urls.append(mirror['url'])
-
         return mirrors
-
-    @staticmethod
-    def get_antergos_mirror_url(mirror_url):
-        """ Get full mirror url from the stats mirror url """
-        lines = []
-        mirrorlist_path = RankMirrors.MIRRORLIST['antergos']
-        with open(mirrorlist_path, 'r') as mirror_file:
-            lines = mirror_file.readlines()
-        for line in lines:
-            if mirror_url in line:
-                return line.split('=')[1].strip()
-        logging.warning("%s not found in %s", mirror_url, mirrorlist_path)
-        return None
 
     @staticmethod
     def get_package_version(name):
@@ -172,11 +130,9 @@ class RankMirrors(multiprocessing.Process):
     def sort_mirrors_by_speed(self, mirrors=None, max_threads=8):
         """ Sorts mirror list """
 
-        test_packages = {
-            'arch': {'name':'cryptsetup', 'version': ''},
-            'antergos': {'name': 'ttf-myanmar3', 'version': ''}}
+        test_packages = {'arch': {'name':'cryptsetup', 'version': ''}}
 
-        rated_mirrors = {'arch': [], 'antergos': []}
+        rated_mirrors = {'arch': []}
 
         for key, value in test_packages.items():
             test_packages[key]['version'] = self.get_package_version(value['name'])
@@ -227,18 +183,7 @@ class RankMirrors(multiprocessing.Process):
             url_len = 0
             for mirror in mirrors[repo]:
                 url_len = max(url_len, len(mirror['url']))
-                if repo == 'antergos':
-                    url = self.get_antergos_mirror_url(mirror['url'])
-                    # Save mirror url
-                    mirror['url'] = url
-                    if url is None:
-                        package_url = None
-                    else:
-                        # Compose package url
-                        package_url = url.replace('$repo', 'antergos').replace('$arch', 'x86_64')
-                        package_url += RankMirrors.DB_SUBPATHS['antergos'].format(name, version)
-                else:
-                    package_url = mirror['url']
+                package_url = mirror['url']
                 if mirror['url'] and package_url:
                     q_in.put((mirror['url'], package_url))
 
@@ -248,14 +193,6 @@ class RankMirrors(multiprocessing.Process):
                 my_thread = threading.Thread(target=worker)
                 my_thread.start()
                 my_threads.append(my_thread)
-
-            # Remove mirrors that are not present in antergos-mirrorlist
-            if repo == 'antergos':
-                mirrors_pruned = []
-                for mirror in mirrors[repo]:
-                    if mirror['url'] is not None:
-                        mirrors_pruned.append(mirror)
-                mirrors[repo] = mirrors_pruned
 
             # Wait for queue to empty
             while not q_in.empty():
@@ -304,9 +241,8 @@ class RankMirrors(multiprocessing.Process):
         """ Uncomment mirrors and comment out auto selection so
         rankmirrors can find the best mirror. """
 
-        comment_urls = [
-            'http://mirrors.antergos.com/$repo/$arch',
-            'sourceforge']
+		# TODO: Do we need that?
+        comment_urls = ['sourceforge']
 
         for repo in RankMirrors.REPOSITORIES:
             if os.path.exists(RankMirrors.MIRRORLIST[repo]):
@@ -339,10 +275,10 @@ class RankMirrors(multiprocessing.Process):
         mlist = self.get_mirror_stats()
         mirrors = self.sort_mirrors_by_speed(mirrors=mlist)
 
-        for repo in ['arch', 'antergos']:
+        for repo in ['arch']:
             self.mirrorlist_ranked[repo] = []
 
-        for repo in ['arch', 'antergos']:
+        for repo in ['arch']:
             output = '# {} mirrorlist generated by cnchi #\n'.format(repo)
             for mirror in mirrors[repo]:
                 self.mirrorlist_ranked[repo].append(mirror['url'])
@@ -366,7 +302,7 @@ class RankMirrors(multiprocessing.Process):
         while not misc.has_connection():
             time.sleep(2)  # Delay, try again after 2 seconds
 
-        logging.debug("Updating both mirrorlists (Arch and Antergos)...")
+        logging.debug("Updating mirrorlists...")
         self.update_mirrorlists()
 
         self.uncomment_mirrors()

@@ -431,7 +431,7 @@ class Installation():
 
         # Load the signature keys
         cmd = ["pacman-key", "--populate", "--gpgdir",
-               dest_path, "archlinux", "antergos"]
+               dest_path, "archlinux"]
         call(cmd)
 
         # path = os.path.join(DEST_DIR, "root/.gnupg/dirmngr_ldapservers.conf")
@@ -464,8 +464,6 @@ class Installation():
             contents = pacman_conf.readlines()
         with open('/etc/pacman.conf', 'w') as new_pacman_conf:
             for line in contents:
-                if 'antergos-mirrorlist' in line:
-                    line = 'Server = http://repo.antergos.info/$repo/$arch'
                 new_pacman_conf.write(line)
 
     def install_packages(self):

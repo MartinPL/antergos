@@ -183,7 +183,7 @@ class PostInstallation():
 
     @staticmethod
     def update_pacman_conf():
-        """ Add Antergos and multilib repos """
+        """ Add multilib repos """
         path = os.path.join(DEST_DIR, "etc/pacman.conf")
         if os.path.exists(path):
             with open(path) as pacman_file:
@@ -200,14 +200,6 @@ class PostInstallation():
                     elif mode == 'x86_64' and multilib_open and pacline.startswith('#Include ='):
                         pacline = pacline[1:]
                         multilib_open = False
-                    elif pacline == '#[testing]\n':
-                        antlines = '\n#[antergos-staging]\n'
-                        antlines += '#SigLevel = PackageRequired\n'
-                        antlines += '#Server = http://mirrors.antergos.com/$repo/$arch/\n\n'
-                        antlines += '[antergos]\n'
-                        antlines += 'SigLevel = PackageRequired\n'
-                        antlines += 'Include = /etc/pacman.d/antergos-mirrorlist\n\n'
-                        pacman_file.write(antlines)
 
                     pacman_file.write(pacline)
         else:
@@ -661,7 +653,7 @@ class PostInstallation():
         except FileExistsError:
             logging.warning("File %s already exists.", mirrorlist_dst_path)
 
-        # Add Antergos repo to /etc/pacman.conf
+        # Add multilib repo to /etc/pacman.conf
         self.update_pacman_conf()
         self.pacman_conf_updated = True
         logging.debug("pacman.conf has been created successfully")

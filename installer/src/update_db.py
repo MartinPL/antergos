@@ -46,17 +46,14 @@ def sync():
 
 def update_mirrorlists():
     """ Make sure we have the latest mirrorlist files """
-    mirrorlists = [
-        "/etc/pacman.d/mirrorlist",
-        "/etc/pacman.d/antergos-mirrorlist"]
+    mirrorlists = ["/etc/pacman.d/mirrorlist"]
     cmd = [
         'pacman',
         '-Syy',
         '--noconfirm',
         '--noprogressbar',
         '--quiet',
-        'pacman-mirrorlist',
-        'antergos-mirrorlist']
+        'pacman-mirrorlist']
     with misc.raised_privileges():
         try:
             with open(os.devnull, 'w') as fnull:

@@ -252,7 +252,7 @@ class CnchiInit():
             lines = pacman.readlines()
 
         repos = [
-            "[antergos]", "[core]", "[extra]", "[community]", "[multilib]"]
+            "[core]", "[extra]", "[community]", "[multilib]"]
 
         for line in lines:
             line = line.strip('\n')
@@ -545,7 +545,7 @@ class CnchiInit():
     def enable_repositories():
         """ Enable needed repositories in /etc/pacman.conf (just in case) """
 
-        repositories = ['antergos', 'core', 'extra', 'community', 'multilib']
+        repositories = ['core', 'extra', 'community', 'multilib']
 
         # Read pacman.conf file
         try:
@@ -571,11 +571,7 @@ class CnchiInit():
                 with misc.raised_privileges():
                     with open("/etc/pacman.conf", 'at') as pconf:
                         pconf.write("[{}]\n".format(repo))
-                        if repo == 'antergos':
-                            pconf.write("SigLevel = PackageRequired\n")
-                            pconf.write("Include = /etc/pacman.d/antergos-mirrorlist\n\n")
-                        else:
-                            pconf.write("Include = /etc/pacman.d/mirrorlist\n\n")
+                        pconf.write("Include = /etc/pacman.d/mirrorlist\n\n")
 
     def disable_suspend(self):
         """ Disable gnome settings suspend to ram """

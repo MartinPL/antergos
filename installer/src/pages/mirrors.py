@@ -334,9 +334,7 @@ class MirrorListBox(Gtk.ListBox):
 class Mirrors(GtkBaseBox):
     """ Page that shows mirrolists so the user can arrange them manually """
 
-    MIRRORLISTS = [
-        "/etc/pacman.d/mirrorlist",
-        "/etc/pacman.d/antergos-mirrorlist"]
+    MIRRORLISTS = ["/etc/pacman.d/mirrorlist"]
 
     def __init__(self, params, prev_page="cache", next_page="installation_ask"):
         super().__init__(self, params, "mirrors", prev_page, next_page)
@@ -346,7 +344,6 @@ class Mirrors(GtkBaseBox):
         self.scrolledwindows = []
 
         self.scrolledwindows.append(self.gui.get_object("scrolledwindow1"))
-        self.scrolledwindows.append(self.gui.get_object("scrolledwindow2"))
 
         for mirror_file in Mirrors.MIRRORLISTS:
             mirror_listbox = MirrorListBox(mirror_file, self.settings)
@@ -461,9 +458,6 @@ class Mirrors(GtkBaseBox):
 
         lbl = self.gui.get_object("arch_mirrors_label")
         lbl.set_text(_("Arch Mirrors"))
-
-        lbl = self.gui.get_object("antergos_mirrors_label")
-        lbl.set_text(_("Antergos Mirrors"))
 
     def store_values(self):
         """ Store selected values """

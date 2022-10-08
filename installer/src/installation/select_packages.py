@@ -201,10 +201,10 @@ class SelectPackages():
             # Use file passed by parameter (overrides server one)
             self.load_xml_local(alternate_package_list)
 
-        if self.xml_root is None:
+        # if self.xml_root is None:
             # The list of packages is retrieved from an online XML to let us
             # control the pkgname in case of any modification
-            self.load_xml_remote()
+            # self.load_xml_remote()
 
         if self.xml_root is None:
             # If the installer can't retrieve the remote file Cnchi will use

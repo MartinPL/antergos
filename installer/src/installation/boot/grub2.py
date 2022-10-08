@@ -188,6 +188,7 @@ class Grub2():
         cmd_linux = cmd_linux.strip()
 
         # Modify /etc/default/grub
+		# TODO
         self.set_grub_option(
             "GRUB_THEME", "/boot/grub/themes/Antergos-Default/theme.txt")
         self.set_grub_option("GRUB_DISTRIBUTOR", "Antergos")

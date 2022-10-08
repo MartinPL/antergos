@@ -618,8 +618,8 @@ class AutoPartition():
             'efi': '/boot/efi', 'boot': '/boot', 'root': '/', 'home': '/home', 'swap': ''}
 
         labels = {
-            'efi': 'UEFI_SYSTEM', 'boot': 'AntergosBoot', 'root': 'AntergosRoot',
-            'home': 'AntergosHome', 'swap': 'AntergosSwap'}
+            'efi': 'UEFI', 'boot': 'Boot', 'root': 'Root',
+            'home': 'Home', 'swap': 'Swap'}
 
         fs_devices = self.get_fs_devices()
 

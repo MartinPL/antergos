@@ -9,13 +9,10 @@ usermod -p $(echo "antergos" | openssl passwd -6 -stdin) root
 chsh -s /usr/bin/zsh antergos
 
 # Install Jade GUI
-flatpak install -y --noninteractive /usr/share/jade-gui/jade-gui.flatpak
-
-# Desktop icon for Jade's GUI
-mkdir -p /home/antergos/Desktop
-cp \
-  /var/lib/flatpak/exports/share/applications/al.getcryst.jadegui.desktop \
-  /home/antergos/Desktop/Install.desktop
+# flatpak install -y --noninteractive /usr/share/jade-gui/jade-gui.flatpak
+pacman -U --noconfirm python-bugsnag-4.2.1-1-any.pkg.tar.zst
+pacman -U --noconfirm python-pyparted-3.11.7-1-x86_64.pkg.tar.zst
+pacman -U --noconfirm cnchi-1-1-any.pkg.tar.zst
 
 # Disable auto screen lock
 mkdir -p /home/antergos/.config/autostart
@@ -33,9 +30,7 @@ Icon=/var/lib/AccountsService/icons/antergos
 SystemAccount=false" > /var/lib/AccountsService/users/antergos
 
 # Jade-GUI Autostart
-cp \
-  /var/lib/flatpak/exports/share/applications/al.getcryst.jadegui.desktop \
-  /home/antergos/.config/autostart
+cp /usr/share/applications/cnchi.desktop /home/antergos/.config/autostart
 
 # Permissions for antergos user
 chown -R antergos:antergos /home/antergos/

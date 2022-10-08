@@ -144,8 +144,6 @@ class Pac():
         self.handle.logcb = self.cb_log
         # Callback used to report download progress
         self.handle.dlcb = self.cb_dl
-        # Callback used to report total download size
-        self.handle.totaldlcb = self.cb_totaldl
         # Callback used for events
         self.handle.eventcb = self.cb_event
         # Callback used for questions
@@ -520,10 +518,6 @@ class Pac():
         if percent != self.last_percent:
             self.last_percent = percent
             self.events.add('percent', percent)
-
-    def cb_totaldl(self, total_size):
-        """ Stores total download size for use in cb_dl and cb_progress """
-        self.total_size = total_size
 
     def cb_dl(self, filename, transferred, total):
         """ Shows downloading progress """

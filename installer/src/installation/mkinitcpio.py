@@ -46,6 +46,8 @@ def run(dest_dir, settings, mount_devices, blvm):
 
     set_hooks_modules_and_files(dest_dir, hooks, modules, files)
 
+    chroot_call(['/usr/bin/mkinitcpio', '-P'])
+
     # Run mkinitcpio on the target system
     # Fix for bsdcpio error. See: http://forum.antergos.com/viewtopic.php?f=5&t=1378&start=20#p5450
     locale = settings.get('locale')

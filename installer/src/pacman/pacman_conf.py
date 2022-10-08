@@ -53,6 +53,7 @@ class InvalidSyntax(Warning):
 # Their values should be accumulated in a list.
 LIST_OPTIONS = (
     'CacheDir',
+    'HookDir',
     'HoldPkg',
     'SyncFirst',
     'IgnoreGroup',
@@ -73,18 +74,18 @@ SINGLE_OPTIONS = (
     'SigLevel',
     'LocalFileSigLevel',
     'RemoteFileSigLevel',
-    'UseDelta',
+    'ParallelDownloads',
 )
 
 BOOLEAN_OPTIONS = (
     'UseSyslog',
     'ShowSize',
-    'UseDelta',
-    'TotalDownload',
     'CheckSpace',
     'VerbosePkgLists',
     'ILoveCandy',
-    'Color'
+    'Color',
+    'DisableDownloadTimeout',
+    'NoProgressBar',
 )
 
 
@@ -208,8 +209,11 @@ class PacmanConfig(collections.OrderedDict):
         # File paths
         handle.logfile = self.options["LogFile"]
         handle.gpgdir = self.options["GPGDir"]
-        # Strings
-        handle.arch = self.options["Architecture"]
+        # Lists
+        arch = self.options["Architecture"]
+        if isinstance(arch, str):
+            arch = [arch]
+        handle.arch = arch
         # Lists
         handle.cachedirs = self.options["CacheDir"]
         if "NoUpgrade" in self.options:

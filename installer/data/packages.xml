@@ -5,23 +5,20 @@
             <packages>
                 <pkgname>acpid</pkgname>
                 <pkgname>alsa-utils</pkgname>
-                <pkgname>antergos-midnight-timers</pkgname>
                 <pkgname>b43-fwcutter</pkgname>
                 <!-- Group -->
                 <pkgname>base</pkgname>
                 <!-- Group -->
                 <pkgname>base-devel</pkgname>
                 <pkgname>bash-completion</pkgname>
-                <pkgname>bind-tools</pkgname>
-                <pkgname>crda</pkgname>
+                <pkgname>bind</pkgname>
+                <pkgname>wireless-regdb</pkgname>
                 <pkgname>cryfs</pkgname>
                 <pkgname>dosfstools</pkgname>
                 <pkgname>haveged</pkgname>
                 <pkgname>htop</pkgname>
                 <pkgname>gzip</pkgname>
                 <pkgname>intel-ucode</pkgname>
-                <pkgname>ipw2100-fw</pkgname>
-                <pkgname>ipw2200-fw</pkgname>
                 <pkgname>mlocate</pkgname>
                 <pkgname>modemmanager</pkgname>
                 <pkgname>net-tools</pkgname>
@@ -40,15 +37,16 @@
                 <pkgname>wget</pkgname>
                 <pkgname>whois</pkgname>
                 <pkgname>wireless_tools</pkgname>
+                <pkgname>mkinitcpio</pkgname>
+                <pkgname>linux</pkgname>
             </packages>
         </edition>
 
         <edition name="graphic" description="Common to all graphic desktops">
             <packages>
-                <pkgname>antergos-alpm-hooks</pkgname>
-                <pkgname>accountsservice</pkgname>
-                <pkgname>antergos-wallpapers</pkgname>
-                <pkgname>antergos-desktop-settings</pkgname>
+                <pkgname>accountsservice</pkgname>\
+				<!-- TODO -->
+                <!-- <pkgname>antergos-desktop-settings</pkgname> -->
                 <pkgname>cdrtools</pkgname>
                 <pkgname>dconf-editor</pkgname> 
                 <pkgname>ffmpegthumbnailer</pkgname>
@@ -62,12 +60,8 @@
                 <pkgname>lightdm</pkgname>
                 <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>light-locker</pkgname>
-                <pkgname>light-locker-settings</pkgname>
                 <pkgname>mesa</pkgname>
                 <pkgname>mesa-vdpau</pkgname>
-                <pkgname>numix-frost-themes</pkgname>
-                <pkgname>numix-icon-theme</pkgname>
-                <pkgname>numix-icon-theme-square</pkgname>
                 <pkgname>pavucontrol</pkgname>
                 <pkgname>pulseaudio</pkgname>
                 <pkgname>pulseaudio-alsa</pkgname>
@@ -81,7 +75,7 @@
                 <pkgname>xf86-video-vesa</pkgname>
                 <pkgname>xorg-bdftopcf</pkgname>
                 <pkgname>xorg-iceauth</pkgname>
-                <pkgname>xorg-luit</pkgname>
+                <!-- <pkgname>xorg-luit</pkgname> TODO: do wee need that -->
                 <pkgname>xorg-mkfontscale</pkgname>
                 <pkgname>xorg-sessreg</pkgname>
                 <pkgname>xorg-setxkbmap</pkgname>
@@ -138,7 +132,8 @@
 
         <edition name="Gnome" description="Gnome Desktop">
             <packages>
-                <pkgname>antergos-gnome-defaults-list</pkgname>
+				<!-- TODO -->
+                <!-- <pkgname>antergos-gnome-defaults-list</pkgname> -->
                 <pkgname>baobab</pkgname>
                 <pkgname>brasero</pkgname>
                 <pkgname>evince</pkgname>
@@ -150,7 +145,6 @@
                 <pkgname>gnome-calendar</pkgname>
                 <pkgname>gnome-contacts</pkgname>
                 <pkgname>gnome-control-center</pkgname>
-                <pkgname>gnome-documents</pkgname>
                 <pkgname>gnome-disk-utility</pkgname>
                 <pkgname>gnome-font-viewer</pkgname>
                 <pkgname>gnome-keyring</pkgname>
@@ -161,8 +155,6 @@
                 <pkgname>gnome-screenshot</pkgname>
                 <pkgname>gnome-shell</pkgname>
                 <pkgname>gnome-shell-extensions</pkgname>
-                <pkgname>gnome-shell-extension-dash-to-dock</pkgname>
-                <pkgname>gnome-shell-extension-status-menu-buttons</pkgname>
                 <pkgname>gnome-sound-recorder</pkgname>
                 <pkgname>gnome-system-monitor</pkgname>
                 <pkgname>gnome-terminal</pkgname>
@@ -179,7 +171,8 @@
                 <pkgname>network-manager-applet</pkgname>
                 <pkgname>networkmanager-openvpn</pkgname>
                 <pkgname>networkmanager-pptp</pkgname>
-                <pkgname>pamac</pkgname>
+				<!-- TODO -->
+                <!-- <pkgname>pamac</pkgname> -->
                 <pkgname>polari</pkgname>
                 <pkgname>python-pysmbc</pkgname>
                 <pkgname>qt5ct</pkgname>
@@ -232,7 +225,8 @@
                 <pkgname>network-manager-applet</pkgname>
                 <pkgname>networkmanager-openvpn</pkgname>
                 <pkgname>networkmanager-pptp</pkgname>
-                <pkgname>pamac</pkgname>
+				<!-- TODO -->
+                <!-- <pkgname>pamac</pkgname> -->
                 <pkgname>python-pysmbc</pkgname>
                 <pkgname>qt5ct</pkgname>
                 <pkgname>totem</pkgname>
@@ -259,7 +253,8 @@
                 <pkgname>network-manager-applet</pkgname>
                 <pkgname>networkmanager-openvpn</pkgname>
                 <pkgname>networkmanager-pptp</pkgname>
-                <pkgname>pamac</pkgname>
+				<!-- TODO -->
+                <!-- <pkgname>pamac</pkgname> -->
                 <pkgname>parole</pkgname>
                 <pkgname>python-pysmbc</pkgname>
                 <pkgname>polkit-gnome</pkgname>
@@ -337,7 +332,8 @@
                 <pkgname>network-manager-applet</pkgname>
                 <pkgname>networkmanager-openvpn</pkgname>
                 <pkgname>networkmanager-pptp</pkgname>
-                <pkgname>pamac</pkgname>
+				<!-- TODO -->
+                <!-- <pkgname>pamac</pkgname> -->
                 <pkgname>pluma</pkgname>
                 <pkgname>pragha</pkgname>
                 <pkgname>python-pysmbc</pkgname>
@@ -379,14 +375,12 @@
                 <pkgname>obconf</pkgname>
                 <pkgname>obkey</pkgname>
                 <pkgname>oblogout</pkgname>
-                <pkgname>oblogout-numix-theme</pkgname>
                 <pkgname>obmenu</pkgname>
                 <pkgname>openbox</pkgname>
                 <pkgname>openbox-menu</pkgname>
                 <pkgname>parcellite</pkgname>
                 <pkgname>pcmanfm</pkgname>
                 <pkgname>plank</pkgname>
-                <pkgname>plank-theme-numix</pkgname>
                 <pkgname>polkit-gnome</pkgname>
                 <pkgname>pragha</pkgname>
                 <pkgname>python-pysmbc</pkgname>
@@ -445,11 +439,10 @@
                 <pkgname>kwrited</pkgname>
                 <pkgname>milou</pkgname>
                 <pkgname>nm-connection-editor</pkgname>
-                <pkgname>numix-frost-themes</pkgname>
-                <pkgname>numix-icon-theme-square</pkgname>
                 <pkgname>okular</pkgname>
                 <pkgname>oxygen</pkgname>
-                <pkgname>pamac-tray-appindicator</pkgname>
+				<!-- TODO -->
+                <!-- <pkgname>pamac-tray-appindicator</pkgname> -->
                 <pkgname>plasma-desktop</pkgname>
                 <pkgname>plasma-nm</pkgname>
                 <pkgname>plasma-pa</pkgname>
@@ -470,7 +463,6 @@
 
         <edition name="Deepin" description="Deepin Desktop">
             <packages>
-                <pkgname>antergos-wallpapers-deepin</pkgname>
                 <pkgname>adwaita-icon-theme</pkgname>
                 <pkgname>brasero</pkgname>
                 <pkgname>deepin-account-faces</pkgname>
@@ -522,7 +514,8 @@
                 <pkgname>noto-fonts</pkgname>
                 <pkgname>noto-fonts-cjk</pkgname>
                 <pkgname>noto-fonts-emoji</pkgname>
-                <pkgname>pamac</pkgname>
+				<!-- TODO -->
+                <!-- <pkgname>pamac</pkgname> -->
                 <pkgname>unicode-character-database</pkgname>
                 <pkgname>xdg-desktop-portal-gtk</pkgname>
             </packages>
@@ -608,7 +601,8 @@
                 <pkgname>network-manager-applet</pkgname>
                 <pkgname>networkmanager-openvpn</pkgname>
                 <pkgname>networkmanager-pptp</pkgname>
-                <pkgname>pamac</pkgname>
+				<!-- TODO -->
+                <!-- <pkgname>pamac</pkgname> -->
                 <pkgname>polari</pkgname>
                 <pkgname>python-pysmbc</pkgname>
                 <pkgname>qt5ct</pkgname>
@@ -817,7 +811,6 @@
             <pkgname>efibootmgr</pkgname>
             <pkgname>grub</pkgname>
             <pkgname>os-prober</pkgname>
-            <pkgname>grub2-theme-antergos</pkgname>
         </bootloader>
         <bootloader name="systemd-boot">
             <!-- previously called gummiboot, now comes with systemd -->

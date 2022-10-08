@@ -127,9 +127,6 @@ cinnamon_settings() {
     cp -f /usr/share/cnchi/scripts/postinstall/panel-launchers@cinnamon.org.json ${CN_DESTDIR}/home/${CN_USER_NAME}/.cinnamon/configs/panel-launchers@cinnamon.org/
 
     set_dmrc cinnamon
-
-    # Populate our wallpapers in Cinnamon Settings
-    chroot ${CN_DESTDIR} "ln -s /usr/share/antergos/wallpapers/ /home/${CN_USER_NAME}/.cinnamon/backgrounds/antergos" ${CN_USER_NAME}
 }
 
 xfce_settings() {
@@ -158,11 +155,6 @@ openbox_settings() {
     set_xscreensaver
 
     set_dmrc openbox
-
-    # Set Numix theme in oblogout
-    if [[ -f /etc/oblogout.conf ]]; then
-        sed -i 's|buttontheme = oxygen|buttontheme = Numix|g' "${CN_DESTDIR}/etc/oblogout.conf"
-    fi
 }
 
 kde_settings() {

@@ -263,6 +263,7 @@ class Installation():
             if os.path.exists(img):
                 os.remove(img)
 
+        # TODO(?)
         # If intel-ucode or grub2-theme-antergos files exist in /boot they are
         # most likely either from another linux installation or from a failed
         # install attempt and need to be removed otherwise pyalpm will refuse

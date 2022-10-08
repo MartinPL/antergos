@@ -194,7 +194,7 @@ class InstallationAlongside(GtkBaseBox):
     def get_distributor_icon_file(self, os_name):
         """ Gets an icon for the installed distribution """
         os_name = os_name.lower()
-
+        # TODO(?)
         # No numix icon for Antergos, use our own.
         if "antergos" in os_name:
             icons_path = os.path.join(self.settings.get('data'), "icons/48x48")

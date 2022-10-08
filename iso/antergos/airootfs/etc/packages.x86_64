@@ -17,7 +17,6 @@ edk2-shell
 sudo
 dosfstools
 systemd-sysvcompat
-cowsay
 btrfs-progs
 xfsprogs
 gparted
@@ -26,7 +25,6 @@ xorg
 xorg-apps
 xorg-xinit
 mesa
-firefox
 
 # Things we're hosting
 arch-install-scripts

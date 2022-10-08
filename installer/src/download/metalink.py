@@ -308,36 +308,6 @@ def parse_args(args):
     return parser.parse_args(args)
 
 
-def get_antergos_repo_pkgs(alpm_handle):
-    """ Returns pkgs from Antergos groups (mate, mate-extra) and
-        the antergos db info """
-
-    antdb = None
-    for database in alpm_handle.get_syncdbs():
-        if database.name == 'antergos':
-            antdb = database
-            break
-
-    if not antdb:
-        logging.error("Cannot sync Antergos repository database!")
-        return {}, None
-
-    group_names = ['mate', 'mate-extra']
-    groups = []
-    for group_name in group_names:
-        group = antdb.read_grp(group_name)
-        if not group:
-            # Group does not exist
-            group = ['None', []]
-        groups.append(group)
-
-    repo_pkgs = {
-        pkg for group in groups
-        for pkg in group[1] if group}
-
-    return repo_pkgs, antdb
-
-
 def resolve_deps(alpm_handle, other, alldeps):
     """ Resolve dependencies """
     missing_deps = []
@@ -361,8 +331,7 @@ def resolve_deps(alpm_handle, other, alldeps):
                     missing_deps.append(dep)
     return other, missing_deps
 
-
-def create_package_set(requested, ant_repo_pkgs, antdb, alpm_handle):
+def create_package_set(requested, alpm_handle):
     """ Create package set from requested set """
 
     found = set()
@@ -370,11 +339,6 @@ def create_package_set(requested, ant_repo_pkgs, antdb, alpm_handle):
 
     for pkg in requested:
         for database in alpm_handle.get_syncdbs():
-            # if pkg is in antergos repo, fetch it from it (instead of another repo)
-            # pkg should be sourced from the antergos repo only.
-            if antdb and pkg in ant_repo_pkgs and database.name != 'antergos':
-                database = antdb
-
             syncpkg = database.get_pkg(pkg)
 
             if syncpkg:
@@ -403,13 +367,7 @@ def build_download_queue(alpm, args=None):
 
     missing_deps = list()
 
-    ant_repo_pkgs, antdb = get_antergos_repo_pkgs(handle)
-
-    if not antdb:
-        logging.error("Cannot load antergos repository database")
-        return None, None, None
-
-    found, other = create_package_set(requested, ant_repo_pkgs, antdb, handle)
+    found, other = create_package_set(requested, handle)
 
     # foreign_names = requested - set(x.name for x in other)
 
@@ -456,7 +414,6 @@ def build_download_queue(alpm, args=None):
         download_queue.add_sync_pkg(pkg, urls, download_sig)
 
     return download_queue, not_found, missing_deps
-
 
 def get_checksum(path, typ):
     """ Returns checksum of a file """

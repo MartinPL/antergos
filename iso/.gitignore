@@ -1,5 +1,6 @@
 *.iso
 *.tar.gz
+*.tar.zst
 antergos/airootfs/etc/pacman.conf
 antergos/airootfs/etc/buildstamp
 chrooted.sh

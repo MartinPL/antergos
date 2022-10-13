@@ -118,25 +118,24 @@ class Slides(GtkBaseBox):
     def reveal_next_slide(self):
         """ Loads slide and reveals it """
         if not self.stop_slideshow:
-            self.slide = ((self.slide + 1) % 3) + 1
-            if 0 < self.slide <= 3:
-                try:
-                    data_dir = self.settings.get('data')
-                    path = os.path.join(data_dir, 'images/slides',
-                                        '{}.png'.format(self.slide))
-                    img = self.gui.get_object('slide1')
-                    # img.set_from_file(path)
-                    # 800x334
-                    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-                        path, 820, 334, False)
-                    # set the content of the image as the pixbuf
-                    img.set_from_pixbuf(pixbuf)
-                    # Reveal image
-                    self.revealer.set_reveal_child(True)
-                except FileNotFoundError:
-                    # FIXME: Installation process finishes before we can read these values ?¿
-                    logging.warning("Can't get configuration values.")
-                    self.stop_slideshow = True
+            self.slide = (self.slide + 1) % 2;
+            try:
+                data_dir = self.settings.get('data')
+                path = os.path.join(data_dir, 'images/slides',
+                                    '{}.png'.format(self.slide + 1))
+                img = self.gui.get_object('slide1')
+                # img.set_from_file(path)
+                # 800x334
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                    path, 820, 334, False)
+                # set the content of the image as the pixbuf
+                img.set_from_pixbuf(pixbuf)
+                # Reveal image
+                self.revealer.set_reveal_child(True)
+            except FileNotFoundError:
+                # FIXME: Installation process finishes before we can read these values ?¿
+                logging.warning("Can't get configuration values.")
+                self.stop_slideshow = True
 
     def image_revealed(self, revealer, _revealed):
         """ Called when a image slide is shown

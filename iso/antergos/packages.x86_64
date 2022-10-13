@@ -2,8 +2,6 @@
 arch-install-scripts
 archlinux-keyring
 btrfs-progs
-cowsay
-curl
 curl
 dosfstools
 edk2-shell
@@ -38,8 +36,7 @@ openvpn
 wireguard-tools
 
 # GUI Target
-firefox
-gdm
+gnome
 gparted
 mesa
 spice-vdagent
@@ -54,3 +51,18 @@ grub
 lsb-release
 sudo
 
+# cnchi
+pyalpm
+geoip2-database
+python-packaging
+python-defusedxml
+python-feedparser
+python-geoip2
+python-libnacl
+python-mako
+python-maxminddb
+usbutils
+haveged
+
+# python-bugsnag
+python-webob

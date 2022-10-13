@@ -188,8 +188,6 @@ class Grub2():
         cmd_linux = cmd_linux.strip()
 
         # Modify /etc/default/grub
-        self.set_grub_option(
-            "GRUB_THEME", "/boot/grub/themes/Antergos-Default/theme.txt")
         self.set_grub_option("GRUB_DISTRIBUTOR", "Antergos")
         self.set_grub_option("GRUB_CMDLINE_LINUX_DEFAULT", cmd_linux_default)
         self.set_grub_option("GRUB_CMDLINE_LINUX", cmd_linux)

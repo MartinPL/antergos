@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
+
+install_aur() {
+    cd /tmp
+    git clone https://aur.archlinux.org/$1.git
+    chown -R nobody $1
+    cd $1
+    sudo -u nobody makepkg
+    pacman -U *.tar.zst --noconfirm
+}
+
 echo "Chrooted in the new system, running as $(whoami)"
 
 # User setup
@@ -8,15 +18,6 @@ usermod -p $(echo "antergos" | openssl passwd -6 -stdin) antergos
 usermod -p $(echo "antergos" | openssl passwd -6 -stdin) root
 chsh -s /usr/bin/zsh antergos
 
-# Install Jade GUI
-flatpak install -y --noninteractive /usr/share/jade-gui/jade-gui.flatpak
-
-# Desktop icon for Jade's GUI
-mkdir -p /home/antergos/Desktop
-cp \
-  /var/lib/flatpak/exports/share/applications/al.getcryst.jadegui.desktop \
-  /home/antergos/Desktop/Install.desktop
-
 # Disable auto screen lock
 mkdir -p /home/antergos/.config/autostart
 echo "[Desktop Entry]
@@ -25,17 +26,6 @@ Comment=Deactive the gnome lock screen in the live session
 Type=Application
 Icon=nautilus
 Exec=sh -c \"gsettings set org.gnome.desktop.screensaver lock-enabled false\"" > /home/antergos/.config/autostart/no-lock-screen.desktop
-
-# Set default session to Onyx
-echo "[User]
-Session=onyx
-Icon=/var/lib/AccountsService/icons/antergos
-SystemAccount=false" > /var/lib/AccountsService/users/antergos
-
-# Jade-GUI Autostart
-cp \
-  /var/lib/flatpak/exports/share/applications/al.getcryst.jadegui.desktop \
-  /home/antergos/.config/autostart
 
 # Permissions for antergos user
 chown -R antergos:antergos /home/antergos/
@@ -55,5 +45,24 @@ reflector > /etc/pacman.d/mirrorlist
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 locale-gen
+
+# makepkg
+pacman -Sy
+pacman -S devtools git --noconfirm
+
+# Install python-bugsnag
+pacman -S python-setuptools python-build python-installer python-wheel --noconfirm
+install_aur "python-bugsnag"
+
+# Install python-pyparted
+pacman -S pkg-config gcc --noconfirm
+install_aur "python-pyparted"
+
+# Install Cnchi
+cd /
+pacman -U --noconfirm cnchi-1-1-any.pkg.tar.zst
+
+# Cnchi Autostart
+cp /usr/share/applications/cnchi.desktop /home/antergos/.config/autostart
 
 echo "Configured the system. Exiting chroot."

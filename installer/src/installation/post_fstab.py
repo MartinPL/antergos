@@ -168,7 +168,7 @@ class PostFstab():
                 vol_name = partition_path[len("/dev/mapper/"):]
                 self.add_vol_to_crypttab(vol_name, uuid, keyfile)
 
-                # Add cryptAntergosHome line to fstab
+                # Add cryptHome line to fstab
                 txt = self.get_device_fstab_line(partition_path, mount_point, myfmt)
                 all_lines.append(txt)
                 continue

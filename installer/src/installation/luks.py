@@ -39,7 +39,7 @@ def close_antergos_devices():
     """ Close LUKS devices (they may have been left open because of a previous
     failed installation) """
 
-    volumes = ["/dev/mapper/cryptAntergos", "/dev/mapper/cryptAntergosHome"]
+    volumes = ["/dev/mapper/cryptAntergos", "/dev/mapper/cryptHome"]
 
     err_msg = "Can't close already opened LUKS devices"
 

@@ -244,16 +244,16 @@ class AutoPartition():
                     # In this case we'll have two LUKS devices, one for root
                     # and the other one for /home
                     devices['luks_home'] = devices['home']
-                    devices['home'] = "/dev/mapper/cryptAntergosHome"
+                    devices['home'] = "/dev/mapper/cryptHome"
         elif self.lvm:
             # No LUKS but using LVM
             devices['lvm'] = devices['root']
 
         if self.lvm:
-            devices['root'] = "/dev/AntergosVG/AntergosRoot"
-            devices['swap'] = "/dev/AntergosVG/AntergosSwap"
+            devices['root'] = "/dev/AntergosVG/Root"
+            devices['swap'] = "/dev/AntergosVG/Swap"
             if self.home:
-                devices['home'] = "/dev/AntergosVG/AntergosHome"
+                devices['home'] = "/dev/AntergosVG/Home"
 
         return devices
 
@@ -473,7 +473,7 @@ class AutoPartition():
             # Create EFI System Partition (ESP)
             # GPT GUID: C12A7328-F81F-11D2-BA4B-00A0C93EC93B
             wrapper.sgdisk_new(
-                device, part_num, "UEFI_SYSTEM", part_sizes['efi'], "EF00")
+                device, part_num, "UEFI", part_sizes['efi'], "EF00")
             part_num += 1
 
         # Create Boot partition
@@ -597,19 +597,19 @@ class AutoPartition():
         err_msg = "Error creating LVM logical volume"
 
         size = str(int(part_sizes['root']))
-        cmd = ["lvcreate", "--name", "AntergosRoot", "--size", size, "AntergosVG"]
+        cmd = ["lvcreate", "--name", "Root", "--size", size, "AntergosVG"]
         call(cmd, msg=err_msg, fatal=True)
 
         if not self.home:
             # Use the remainig space for our swap volume
-            cmd = ["lvcreate", "--name", "AntergosSwap", "--extents", "100%FREE", "AntergosVG"]
+            cmd = ["lvcreate", "--name", "Swap", "--extents", "100%FREE", "AntergosVG"]
             call(cmd, msg=err_msg, fatal=True)
         else:
             size = str(int(part_sizes['swap']))
-            cmd = ["lvcreate", "--name", "AntergosSwap", "--size", size, "AntergosVG"]
+            cmd = ["lvcreate", "--name", "Swap", "--size", size, "AntergosVG"]
             call(cmd, msg=err_msg, fatal=True)
             # Use the remaining space for our home volume
-            cmd = ["lvcreate", "--name", "AntergosHome", "--extents", "100%FREE", "AntergosVG"]
+            cmd = ["lvcreate", "--name", "Home", "--extents", "100%FREE", "AntergosVG"]
             call(cmd, msg=err_msg, fatal=True)
 
     def create_filesystems(self, devices):
@@ -618,8 +618,8 @@ class AutoPartition():
             'efi': '/boot/efi', 'boot': '/boot', 'root': '/', 'home': '/home', 'swap': ''}
 
         labels = {
-            'efi': 'UEFI_SYSTEM', 'boot': 'AntergosBoot', 'root': 'AntergosRoot',
-            'home': 'AntergosHome', 'swap': 'AntergosSwap'}
+            'efi': 'UEFI', 'boot': 'Boot', 'root': 'Root',
+            'home': 'Home', 'swap': 'Swap'}
 
         fs_devices = self.get_fs_devices()
 
@@ -761,7 +761,7 @@ class AutoPartition():
             if self.home and not self.lvm:
                 luks_options = {'password': self.luks_password,
                                 'key': AutoPartition.LUKS_KEY_FILES[1]}
-                luks.setup(devices['luks_home'], 'cryptAntergosHome', luks_options)
+                luks.setup(devices['luks_home'], 'cryptHome', luks_options)
 
         if self.lvm:
             self.run_lvm(devices, part_sizes, start_part_sizes, disk_size)

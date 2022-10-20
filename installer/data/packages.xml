@@ -413,15 +413,12 @@
                 <pkgname>kde-gtk-config</pkgname>
                 <pkgname>kdelibs4support</pkgname>
                 <pkgname>kopete</pkgname>
-                <pkgname>kde-servicemenus-rootactions</pkgname>
                 <!--<pkgname>kdesudo</pkgname>-->
                 <pkgname>sweeper</pkgname>
                 <pkgname>kdialog</pkgname>
-                <pkgname>kfaenza-icon-theme</pkgname>
                 <pkgname>kfind</pkgname>
                 <pkgname>khelpcenter</pkgname>
                 <pkgname>kinfocenter</pkgname>
-                <pkgname>kipi-plugins</pkgname>
                 <pkgname>kmenuedit</pkgname>
                 <pkgname>konsole</pkgname>
                 <pkgname>kscreen</pkgname>
@@ -448,7 +445,6 @@
                 <pkgname>spectacle</pkgname>
                 <pkgname>systemsettings</pkgname>
                 <pkgname>transmission-qt</pkgname>
-                <pkgname>user-manager</pkgname>
                 <pkgname>vlc</pkgname>
                 <pkgname>xdg-user-dirs</pkgname>
             </packages>

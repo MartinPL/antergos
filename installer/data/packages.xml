@@ -55,8 +55,6 @@
                 <pkgname>gst-plugins-ugly</pkgname>
                 <pkgname>gstreamer-vaapi</pkgname>
                 <pkgname>libdvdcss</pkgname>
-                <pkgname>lightdm</pkgname>
-                <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>light-locker</pkgname>
                 <pkgname>mesa</pkgname>
                 <pkgname>mesa-vdpau</pkgname>
@@ -129,6 +127,7 @@
 
         <edition name="Gnome" description="Gnome Desktop">
             <packages>
+                <pkgname>gdm</pkgname>
                 <pkgname>baobab</pkgname>
                 <pkgname>brasero</pkgname>
                 <pkgname>evince</pkgname>
@@ -179,7 +178,8 @@
 
         <edition name="Cinnamon" description="Cinnamon desktop">
             <packages>
-                <pkgname>antergos-gnome-defaults-list</pkgname>
+                <pkgname>lightdm</pkgname>
+                <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>baobab</pkgname>
                 <pkgname>brasero</pkgname>
                 <pkgname>cinnamon</pkgname>
@@ -229,6 +229,8 @@
 
         <edition name="XFCE" description="XFCE Desktop">
             <packages>
+                <pkgname>lightdm</pkgname>
+                <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>catfish</pkgname>
                 <pkgname>evince</pkgname>
                 <pkgname>file-roller</pkgname>
@@ -283,6 +285,8 @@
 
         <edition name="Mate" description="MATE Desktop">
             <packages>
+                <pkgname>lightdm</pkgname>
+                <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>atril</pkgname>
                 <pkgname>brisk-menu</pkgname>
                 <pkgname>caja</pkgname>
@@ -333,6 +337,8 @@
 
         <edition name="openbox" description="Openbox Window Manager">
             <packages>
+                <pkgname>lightdm</pkgname>
+                <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>arandr</pkgname>
                 <pkgname>conky</pkgname>
                 <pkgname>conky-manager</pkgname>
@@ -386,6 +392,8 @@
 
         <edition name="KDE" description="KDE Desktop">
             <packages>
+                <pkgname>lightdm</pkgname>
+                <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>ark</pkgname>
                 <pkgname>aspell-en</pkgname>
                 <pkgname>breeze</pkgname>
@@ -448,6 +456,8 @@
 
         <edition name="Deepin" description="Deepin Desktop">
             <packages>
+                <pkgname>lightdm</pkgname>
+                <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>adwaita-icon-theme</pkgname>
                 <pkgname>brasero</pkgname>
                 <pkgname>deepin-account-faces</pkgname>
@@ -508,6 +518,8 @@
 
         <edition name="lxqt" description="LXQT Desktop">
             <packages>
+                <pkgname>lightdm</pkgname>
+                <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>kalu</pkgname>
                 <pkgname>lxqt-about</pkgname>
                 <pkgname>lxqt-config</pkgname>
@@ -526,6 +538,8 @@
 
         <edition name="Enlightenment" description="Enlightenment Desktop">
             <packages>
+                <pkgname>lightdm</pkgname>
+                <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>ark</pkgname>
                 <pkgname>enlightenment</pkgname>
                 <pkgname>connman</pkgname>
@@ -544,7 +558,8 @@
 
         <edition name="Budgie" description="Solus desktop">
             <packages>
-                <pkgname>antergos-gnome-defaults-list</pkgname>
+                <pkgname>lightdm</pkgname>
+                <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>baobab</pkgname>
                 <pkgname>brasero</pkgname>
                 <pkgname>budgie-desktop</pkgname>
@@ -597,6 +612,8 @@
 
         <edition name="i3" description="Tiling window manager">
             <packages>
+                <pkgname>lightdm</pkgname>
+                <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>arandr</pkgname>
                 <pkgname>awesome-terminal-fonts</pkgname>
                 <pkgname>dmenu</pkgname>

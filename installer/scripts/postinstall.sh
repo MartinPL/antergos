@@ -83,6 +83,30 @@ set_dmrc() {
     chroot ${CN_DESTDIR} chown ${CN_USER_NAME}:users /home/${CN_USER_NAME}/.dmrc
 }
 
+set_lightdm() {
+    # Workaround for LightDM bug https://bugs.launchpad.net/lightdm/+bug/1069218
+    sed -i 's|UserAccounts|UserList|g' "${CN_DESTDIR}/etc/lightdm/users.conf"
+
+    # Monkey patch session wrapper
+    cp /usr/share/cnchi/scripts/postinstall/Xsession "${CN_DESTDIR}/etc/lightdm"
+    chmod +x "${CN_DESTDIR}/etc/lightdm/Xsession"
+
+    # Set lightdm-webkit2-greeter in lightdm.conf. This should have been done here (not in the pkg) all along.
+    sed -i 's|#greeter-session=example-gtk-gnome|greeter-session=lightdm-webkit2-greeter|g' "${CN_DESTDIR}/etc/lightdm/lightdm.conf"
+
+    # Start vbox client services if we are installed in vbox
+    if [[ ${CN_IS_VBOX} = "True" ]] || { [[ $(systemd-detect-virt) ]] && [[ 'oracle' = $(systemd-detect-virt -v) ]]; }; then
+        # TODO: This should be done differently
+        sed -i 's|echo "X|/usr/bin/VBoxClient-all \&\necho "X|g' "${CN_DESTDIR}/etc/lightdm/Xsession"
+    fi
+
+    # copy antergos menu icon
+    mkdir -p ${CN_DESTDIR}/usr/share/antergos/
+    cp -t ${CN_DESTDIR}/usr/share/antergos \
+    /usr/share/antergos/antergos-menu.png \
+    /usr/share/cnchi/data/images/antergos/antergos-menu-logo-dark-bg.png
+}
+
 common_settings() {
     # Set skel directory (not needed, antergos-desktop-settings does this)
     #cp -R ${CN_DESTDIR}/home/${CN_USER_NAME}/.config ${CN_DESTDIR}/etc/skel
@@ -105,6 +129,7 @@ gnome_settings() {
     set_xscreensaver
 
     set_dmrc gnome
+	chroot ${CN_DESTDIR} systemctl enable gdm
 }
 
 cinnamon_settings() {
@@ -127,6 +152,7 @@ cinnamon_settings() {
     cp -f /usr/share/cnchi/scripts/postinstall/panel-launchers@cinnamon.org.json ${CN_DESTDIR}/home/${CN_USER_NAME}/.cinnamon/configs/panel-launchers@cinnamon.org/
 
     set_dmrc cinnamon
+	set_lightdm
 }
 
 xfce_settings() {
@@ -148,6 +174,7 @@ xfce_settings() {
 
     # Add lxpolkit to autostart apps
     cp /etc/xdg/autostart/lxpolkit.desktop ${CN_DESTDIR}/home/${CN_USER_NAME}/.config/autostart
+    set_lightdm
 }
 
 openbox_settings() {
@@ -155,6 +182,7 @@ openbox_settings() {
     set_xscreensaver
 
     set_dmrc openbox
+    set_lightdm
 }
 
 kde_settings() {
@@ -178,6 +206,7 @@ kde_settings() {
 
     # Set default directories
     chroot ${CN_DESTDIR} su -c xdg-user-dirs-update ${CN_USER_NAME}
+    set_lightdm
 }
 
 mate_settings() {
@@ -211,9 +240,12 @@ mate_settings() {
     mkdir -p "${CN_DESTDIR}/home/${CN_USER_NAME}/.config/autostart"
     cp "${CN_HOTFIX_DESKTOP}" "${CN_DESTDIR}/home/${CN_USER_NAME}/.config/autostart"
     chmod +x "${CN_DESTDIR}/usr/bin/first-boot-hotfix.sh"
+
+    set_lightdm
 }
 
 nox_settings() {
+	set_lightdm
     echo "Done"
 }
 
@@ -224,6 +256,7 @@ lxqt_settings() {
     set_xscreensaver
 
     set_dmrc razor
+	set_lightdm
 }
 
 enlightenment_settings() {
@@ -251,6 +284,7 @@ enlightenment_settings() {
 
     # Add lxpolkit to autostart apps
     cp /etc/xdg/autostart/lxpolkit.desktop ${CN_DESTDIR}/home/${CN_USER_NAME}/.config/autostart
+    set_lightdm
 }
 
 budgie_settings() {
@@ -258,6 +292,7 @@ budgie_settings() {
     set_xscreensaver
 
     set_dmrc budgie
+    set_lightdm
 }
 
 i3_settings() {
@@ -265,6 +300,7 @@ i3_settings() {
     set_xscreensaver
 
     set_dmrc i3
+    set_lightdm
 }
 
 postinstall() {
@@ -276,9 +312,6 @@ postinstall() {
     else
         export CN_BROWSER=""
     fi
-
-    # Workaround for LightDM bug https://bugs.launchpad.net/lightdm/+bug/1069218
-    sed -i 's|UserAccounts|UserList|g' "${CN_DESTDIR}/etc/lightdm/users.conf"
 
     ## Unmute alsa channels
     #chroot "${CN_DESTDIR}" amixer -c 0 -q set Master playback 50% unmute
@@ -295,10 +328,6 @@ postinstall() {
         cp /usr/share/cnchi/scripts/postinstall/qt5ct.conf "${CN_DESTDIR}/home/${CN_USER_NAME}/.config/qt5ct"
     fi
 
-    # Monkey patch session wrapper
-    cp /usr/share/cnchi/scripts/postinstall/Xsession "${CN_DESTDIR}/etc/lightdm"
-    chmod +x "${CN_DESTDIR}/etc/lightdm/Xsession"
-
     # Configure fontconfig
     FONTCONFIG_FILE="/usr/share/cnchi/scripts/fonts.conf"
     if [[ -f "${FONTCONFIG_FILE}" ]]; then
@@ -311,12 +340,6 @@ postinstall() {
     cp /etc/arch-release "${CN_DESTDIR}/etc"
     cp /etc/os-release "${CN_DESTDIR}/etc"
     sed -i 's|Arch|Antergos|g' "${CN_DESTDIR}/etc/issue"
-
-    # copy antergos menu icon
-    mkdir -p ${CN_DESTDIR}/usr/share/antergos/
-    cp -t ${CN_DESTDIR}/usr/share/antergos \
-    /usr/share/antergos/antergos-menu.png \
-    /usr/share/cnchi/data/images/antergos/antergos-menu-logo-dark-bg.png
 
     # Set common desktop settigns
     common_settings
@@ -346,17 +369,8 @@ postinstall() {
     # Most users are building packages to install them locally so there's no need for compression.
     sed -i "s|^PKGEXT='.pkg.tar.xz'|PKGEXT='.pkg.tar'|g" "${CN_DESTDIR}/etc/makepkg.conf"
 
-    # Set lightdm-webkit2-greeter in lightdm.conf. This should have been done here (not in the pkg) all along.
-    sed -i 's|#greeter-session=example-gtk-gnome|greeter-session=lightdm-webkit2-greeter|g' "${CN_DESTDIR}/etc/lightdm/lightdm.conf"
-
     # Ensure user permissions are set in /home
     chroot "${CN_DESTDIR}" chown -R "${CN_USER_NAME}:users" "/home/${CN_USER_NAME}"
-
-    # Start vbox client services if we are installed in vbox
-    if [[ ${CN_IS_VBOX} = "True" ]] || { [[ $(systemd-detect-virt) ]] && [[ 'oracle' = $(systemd-detect-virt -v) ]]; }; then
-        # TODO: This should be done differently
-        sed -i 's|echo "X|/usr/bin/VBoxClient-all \&\necho "X|g' "${CN_DESTDIR}/etc/lightdm/Xsession"
-    fi
 }
 
 touch /tmp/.postinstall.lock

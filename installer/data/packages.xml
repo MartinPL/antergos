@@ -16,7 +16,6 @@
                 <pkgname>cryfs</pkgname>
                 <pkgname>dosfstools</pkgname>
                 <pkgname>haveged</pkgname>
-                <pkgname>htop</pkgname>
                 <pkgname>gzip</pkgname>
                 <pkgname>intel-ucode</pkgname>
                 <pkgname>mlocate</pkgname>
@@ -46,7 +45,6 @@
             <packages>
                 <pkgname>accountsservice</pkgname>
                 <pkgname>cdrtools</pkgname>
-                <pkgname>dconf-editor</pkgname> 
                 <pkgname>ffmpegthumbnailer</pkgname>
                 <pkgname>gst-libav</pkgname>
                 <pkgname>gst-plugins-bad</pkgname>
@@ -129,11 +127,10 @@
             <packages>
                 <pkgname>gdm</pkgname>
                 <pkgname>baobab</pkgname>
-                <pkgname>brasero</pkgname>
                 <pkgname>evince</pkgname>
                 <pkgname>eog</pkgname>
                 <pkgname>file-roller</pkgname>
-                <pkgname>gedit</pkgname>
+                <pkgname>gnome-text-editor</pkgname>
                 <pkgname>gnome-backgrounds</pkgname>
                 <pkgname>gnome-calculator</pkgname>
                 <pkgname>gnome-calendar</pkgname>
@@ -165,12 +162,10 @@
                 <pkgname>network-manager-applet</pkgname>
                 <pkgname>networkmanager-openvpn</pkgname>
                 <pkgname>networkmanager-pptp</pkgname>
-                <pkgname>polari</pkgname>
                 <pkgname>python-pysmbc</pkgname>
                 <pkgname>qt5ct</pkgname>
                 <pkgname>seahorse</pkgname>
                 <pkgname>totem</pkgname>
-                <pkgname>transmission-gtk</pkgname>
                 <pkgname>xdg-user-dirs-gtk</pkgname>
                 <pkgname>xscreensaver</pkgname>
             </packages>
@@ -181,7 +176,6 @@
                 <pkgname>lightdm</pkgname>
                 <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>baobab</pkgname>
-                <pkgname>brasero</pkgname>
                 <pkgname>cinnamon</pkgname>
                 <pkgname>cinnamon-control-center</pkgname>
                 <pkgname>cinnamon-desktop</pkgname>
@@ -194,7 +188,7 @@
                 <pkgname>eog</pkgname>
                 <pkgname>evince</pkgname>
                 <pkgname>file-roller</pkgname>
-                <pkgname>gedit</pkgname>
+                <pkgname>gnome-text-editor</pkgname>
                 <pkgname>gnome-calculator</pkgname>
                 <pkgname>gnome-common</pkgname>
                 <pkgname>gnome-disk-utility</pkgname>
@@ -221,7 +215,6 @@
                 <pkgname>python-pysmbc</pkgname>
                 <pkgname>qt5ct</pkgname>
                 <pkgname>totem</pkgname>
-                <pkgname>transmission-gtk</pkgname>
                 <pkgname>xdg-user-dirs-gtk</pkgname>
                 <pkgname>zuki-themes</pkgname>
             </packages>
@@ -255,7 +248,6 @@
                 <pkgname>thunar</pkgname>
                 <pkgname>thunar-archive-plugin</pkgname>
                 <pkgname>thunar-volman</pkgname>
-                <pkgname>transmission-gtk</pkgname>
                 <pkgname>tumbler</pkgname>
                 <pkgname>xdg-user-dirs-gtk</pkgname>
                 <pkgname>exo</pkgname>
@@ -329,7 +321,6 @@
                 <pkgname>pragha</pkgname>
                 <pkgname>python-pysmbc</pkgname>
                 <pkgname>totem</pkgname>
-                <pkgname>transmission-gtk</pkgname>
                 <pkgname>xdg-user-dirs-gtk</pkgname>
                 <pkgname>xfburn</pkgname>
             </packages>
@@ -381,7 +372,6 @@
                 <pkgname>qt5ct</pkgname>
                 <pkgname>scrot</pkgname>
                 <pkgname>tint2</pkgname>
-                <pkgname>transmission-gtk</pkgname>
                 <pkgname>udiskie</pkgname>
                 <pkgname>volumeicon</pkgname>
                 <pkgname>waldorf-ui-theme</pkgname>
@@ -444,7 +434,6 @@
                 <pkgname>qtcurve-utils</pkgname>
                 <pkgname>spectacle</pkgname>
                 <pkgname>systemsettings</pkgname>
-                <pkgname>transmission-qt</pkgname>
                 <pkgname>vlc</pkgname>
                 <pkgname>xdg-user-dirs</pkgname>
             </packages>
@@ -455,7 +444,6 @@
                 <pkgname>lightdm</pkgname>
                 <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>adwaita-icon-theme</pkgname>
-                <pkgname>brasero</pkgname>
                 <pkgname>deepin-account-faces</pkgname>
                 <pkgname>deepin-api</pkgname>
                 <pkgname>deepin-desktop-schemas</pkgname>
@@ -493,7 +481,7 @@
                 <pkgname>deepin-mutter</pkgname>
                 <pkgname>deepin-polkit-agent</pkgname>
                 <pkgname>dtkwm</pkgname>
-                <pkgname>gedit</pkgname>
+                <pkgname>gnome-text-editor</pkgname>
                 <pkgname>gnome-calculator</pkgname>
                 <pkgname>gnome-disk-utility</pkgname>
                 <pkgname>gnome-font-viewer</pkgname>
@@ -557,12 +545,11 @@
                 <pkgname>lightdm</pkgname>
                 <pkgname>lightdm-webkit2-greeter</pkgname>
                 <pkgname>baobab</pkgname>
-                <pkgname>brasero</pkgname>
                 <pkgname>budgie-desktop</pkgname>
                 <pkgname>evince</pkgname>
                 <pkgname>eog</pkgname>
                 <pkgname>file-roller</pkgname>
-                <pkgname>gedit</pkgname>
+                <pkgname>gnome-text-editor</pkgname>
                 <pkgname>gnome-backgrounds</pkgname>
                 <pkgname>gnome-calculator</pkgname>
                 <pkgname>gnome-calendar</pkgname>
@@ -595,12 +582,10 @@
                 <pkgname>network-manager-applet</pkgname>
                 <pkgname>networkmanager-openvpn</pkgname>
                 <pkgname>networkmanager-pptp</pkgname>
-                <pkgname>polari</pkgname>
                 <pkgname>python-pysmbc</pkgname>
                 <pkgname>qt5ct</pkgname>
                 <pkgname>seahorse</pkgname>
                 <pkgname>totem</pkgname>
-                <pkgname>transmission-gtk</pkgname>
                 <pkgname>xdg-user-dirs-gtk</pkgname>
                 <pkgname>xscreensaver</pkgname>
             </packages>

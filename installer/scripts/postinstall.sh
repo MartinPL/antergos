@@ -301,13 +301,6 @@ postinstall() {
         set_xorg_touchpad
     fi
 
-    # Fix ugly styles for Qt applications when running under GTK-based desktops and Qt 5.7+
-    if [[ kde != "${CN_DESKTOP}" && lxqt != "${CN_DESKTOP}" ]]; then
-        mkdir -p "${CN_DESTDIR}/home/${CN_USER_NAME}/.config/qt5ct" "${CN_DESTDIR}/etc/skel/qt5ct"
-        cp /usr/share/cnchi/scripts/postinstall/qt5ct.conf "${CN_DESTDIR}/etc/skel/qt5ct"
-        cp /usr/share/cnchi/scripts/postinstall/qt5ct.conf "${CN_DESTDIR}/home/${CN_USER_NAME}/.config/qt5ct"
-    fi
-
     # Configure fontconfig
     FONTCONFIG_FILE="/usr/share/cnchi/scripts/fonts.conf"
     if [[ -f "${FONTCONFIG_FILE}" ]]; then

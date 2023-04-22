@@ -161,7 +161,6 @@
                 <pkgname>networkmanager-openvpn</pkgname>
                 <pkgname>networkmanager-pptp</pkgname>
                 <pkgname>python-pysmbc</pkgname>
-                <pkgname>qt5ct</pkgname>
                 <pkgname>seahorse</pkgname>
                 <pkgname>totem</pkgname>
                 <pkgname>xdg-user-dirs-gtk</pkgname>
@@ -210,7 +209,6 @@
                 <pkgname>networkmanager-openvpn</pkgname>
                 <pkgname>networkmanager-pptp</pkgname>
                 <pkgname>python-pysmbc</pkgname>
-                <pkgname>qt5ct</pkgname>
                 <pkgname>totem</pkgname>
                 <pkgname>xdg-user-dirs-gtk</pkgname>
                 <pkgname>zuki-themes</pkgname>
@@ -240,7 +238,6 @@
                 <pkgname>python-pysmbc</pkgname>
                 <pkgname>polkit-gnome</pkgname>
                 <pkgname>pragha</pkgname>
-                <pkgname>qt5ct</pkgname>
                 <pkgname>ristretto</pkgname>
                 <pkgname>thunar</pkgname>
                 <pkgname>thunar-archive-plugin</pkgname>
@@ -366,7 +363,6 @@
                 <pkgname>pragha</pkgname>
                 <pkgname>python-pysmbc</pkgname>
                 <pkgname>python2-xdg</pkgname>
-                <pkgname>qt5ct</pkgname>
                 <pkgname>scrot</pkgname>
                 <pkgname>tint2</pkgname>
                 <pkgname>udiskie</pkgname>
@@ -526,7 +522,6 @@
                 <pkgname>connman</pkgname>
                 <pkgname>econnman</pkgname>
                 <pkgname>kalu</pkgname>
-                <pkgname>qt5ct</pkgname>
                 <pkgname>rage</pkgname>
                 <pkgname>terminology</pkgname>
                 <pkgname>ttf-dejavu</pkgname>
@@ -580,7 +575,6 @@
                 <pkgname>networkmanager-openvpn</pkgname>
                 <pkgname>networkmanager-pptp</pkgname>
                 <pkgname>python-pysmbc</pkgname>
-                <pkgname>qt5ct</pkgname>
                 <pkgname>seahorse</pkgname>
                 <pkgname>totem</pkgname>
                 <pkgname>xdg-user-dirs-gtk</pkgname>

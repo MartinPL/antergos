@@ -37,16 +37,6 @@ set_xorg_touchpad() {
     fi
 }
 
-set_xscreensaver() {
-    # xscreensaver config
-    cp /usr/share/cnchi/scripts/postinstall/xscreensaver ${CN_DESTDIR}/home/${CN_USER_NAME}/.xscreensaver
-    cp ${CN_DESTDIR}/home/${CN_USER_NAME}/.xscreensaver ${CN_DESTDIR}/etc/skel
-
-    if [[ -f ${CN_DESTDIR}/etc/xdg/autostart/xscreensaver.desktop ]]; then
-        rm ${CN_DESTDIR}/etc/xdg/autostart/xscreensaver.desktop
-    fi
-}
-
 set_gsettings() {
     # Set gsettings input-source
     CN_KEYBOARD=""
@@ -126,7 +116,6 @@ common_settings() {
 
 gnome_settings() {
     set_gsettings
-    set_xscreensaver
 
     set_dmrc gnome
 	chroot ${CN_DESTDIR} systemctl enable gdm
@@ -134,7 +123,6 @@ gnome_settings() {
 
 cinnamon_settings() {
     set_gsettings
-    set_xscreensaver
 
     # Copy menu@cinnamon.org.json to set menu icon
     mkdir -p ${CN_DESTDIR}/home/${CN_USER_NAME}/.cinnamon/configs/menu@cinnamon.org/
@@ -157,7 +145,6 @@ cinnamon_settings() {
 
 xfce_settings() {
     set_gsettings
-    set_xscreensaver
 
     # Set XFCE settings
     mkdir -p ${CN_DESTDIR}/home/${CN_USER_NAME}/.config/xfce4/xfconf/xfce-perchannel-xml
@@ -179,7 +166,6 @@ xfce_settings() {
 
 openbox_settings() {
     set_gsettings
-    set_xscreensaver
 
     set_dmrc openbox
     set_lightdm
@@ -187,7 +173,6 @@ openbox_settings() {
 
 kde_settings() {
     set_gsettings
-    set_xscreensaver
 
     set_dmrc kde-plasma
 
@@ -211,7 +196,6 @@ kde_settings() {
 
 mate_settings() {
     set_gsettings
-    set_xscreensaver
 
     set_dmrc mate
 
@@ -253,7 +237,6 @@ nox_settings() {
 
 lxqt_settings() {
     set_gsettings
-    set_xscreensaver
 
     set_dmrc razor
 	set_lightdm
@@ -261,7 +244,6 @@ lxqt_settings() {
 
 enlightenment_settings() {
     set_gsettings
-    set_xscreensaver
 
     # http://git.enlightenment.org/core/enlightenment.git/plain/data/tools/enlightenment_remote
 
@@ -289,7 +271,6 @@ enlightenment_settings() {
 
 budgie_settings() {
     set_gsettings
-    set_xscreensaver
 
     set_dmrc budgie
     set_lightdm
@@ -297,7 +278,6 @@ budgie_settings() {
 
 i3_settings() {
     set_gsettings
-    set_xscreensaver
 
     set_dmrc i3
     set_lightdm

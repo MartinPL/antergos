@@ -26,7 +26,6 @@
                 <pkgname>openssh</pkgname>
                 <pkgname>pkgfile</pkgname>
                 <pkgname>reflector</pkgname>
-                <pkgname>screenfetch</pkgname>
                 <pkgname>sudo</pkgname>
                 <pkgname>terminus-font</pkgname>
                 <pkgname>tar</pkgname>
@@ -44,7 +43,6 @@
         <edition name="graphic" description="Common to all graphic desktops">
             <packages>
                 <pkgname>accountsservice</pkgname>
-                <pkgname>cdrtools</pkgname>
                 <pkgname>ffmpegthumbnailer</pkgname>
                 <pkgname>gst-libav</pkgname>
                 <pkgname>gst-plugins-bad</pkgname>
@@ -167,7 +165,6 @@
                 <pkgname>seahorse</pkgname>
                 <pkgname>totem</pkgname>
                 <pkgname>xdg-user-dirs-gtk</pkgname>
-                <pkgname>xscreensaver</pkgname>
             </packages>
         </edition>
 
@@ -587,7 +584,6 @@
                 <pkgname>seahorse</pkgname>
                 <pkgname>totem</pkgname>
                 <pkgname>xdg-user-dirs-gtk</pkgname>
-                <pkgname>xscreensaver</pkgname>
             </packages>
         </edition>
 
@@ -627,7 +623,6 @@
                 <pkgname>volumeicon</pkgname>
                 <pkgname>xdg-user-dirs-gtk</pkgname>
                 <pkgname>xfburn</pkgname>
-                <pkgname>xscreensaver</pkgname>
             </packages>
         </edition>
     </editions>

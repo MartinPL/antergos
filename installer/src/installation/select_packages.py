@@ -42,8 +42,6 @@ from misc.extra import InstallError
 
 import hardware.hardware as hardware
 
-from lembrame.lembrame import Lembrame
-
 # When testing, no _() is available
 try:
     _("")
@@ -73,12 +71,6 @@ class SelectPackages():
         self.vbox = False
 
         self.xml_root = None
-
-        # If Lembrame enabled set pacman.conf pointing to the decrypted folder
-        if self.settings.get('feature_lembrame'):
-            self.lembrame = Lembrame(self.settings)
-            path = os.path.join(self.lembrame.config.folder_file_path, 'pacman.conf')
-            self.settings.set('pacman_config_file', path)
 
     def create_package_list(self):
         """ Create package list """
@@ -351,12 +343,6 @@ class SelectPackages():
             "Check for user desired features and add them to our installation")
         self.add_features()
         logging.debug("All features needed packages have been added")
-
-        # Add Lembrame packages but install Cnchi defaults too
-        # TODO: Lembrame has to generate a better package list indicating DM and stuff
-        if self.settings.get("feature_lembrame"):
-            self.events.add('info', _("Appending list of packages from Lembrame"))
-            self.packages = self.packages + self.lembrame.get_pacman_packages()
 
         # Remove duplicates and conflicting packages
         self.cleanup_packages_list()

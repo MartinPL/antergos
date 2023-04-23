@@ -42,8 +42,6 @@ import misc.extra as misc
 
 from pages.gtkbasebox import GtkBaseBox
 
-from lembrame.dialog import LembrameDialog
-
 from hardware.modules.nvidia import Nvidia
 from hardware.modules.nvidia_390xx import Nvidia390xx
 from hardware.modules.nvidia_340xx import Nvidia340xx
@@ -118,10 +116,6 @@ class Features(GtkBaseBox):
         # Only load defaults for each DE the first time this screen is shown
         self.defaults_loaded = False
 
-        # Store which features where active when lembrame was selected
-        # (when lembrame is selected, all other features are deactivated)
-        self.features_lembrame = []
-
     def show_advanced_toggled(self, _widget):
         """ Display or hide advanced features """
         self.show_advanced = self.advanced_checkbutton.get_active()
@@ -180,39 +174,6 @@ class Features(GtkBaseBox):
             if row[Features.COL_SWITCH] == switch:
                 is_active = switch.get_active()
                 self.settings.set("feature_" + feature, is_active)
-                # Extra actions on this switch trigger
-                self.extra_switch_actions(feature, is_active)
-
-    def extra_switch_actions(self, feature, is_active):
-        """ Lembrame feature disables all others, any other disables lembrame """
-        if is_active:
-            if feature == 'lembrame':
-                # Disable all switches if Lembrame is selected
-                logging.debug("Activating Lembrame. Deactivating the rest of the switches")
-                self.features_lembrame = []
-                for row_feature in self.listbox_rows:
-                    if row_feature != 'lembrame':
-                        switch = self.listbox_rows[row_feature][Features.COL_SWITCH]
-                        if switch.get_active():
-                            self.features_lembrame.append(row_feature)
-                            switch.set_active(False)
-            else:
-                # Disable lembrame if any other option is activated
-                self.features_lembrame = []
-                try:
-                    switch = self.listbox_rows['lembrame'][Features.COL_SWITCH]
-                    if switch and switch.get_active():
-                        msg = "Activating something else besides Lembrame. Deactivating Lembrame."
-                        logging.debug(msg)
-                        switch.set_active(False)
-                except KeyError as err:
-                    pass
-        elif feature == 'lembrame':
-            # Activate previous deactivated features
-            for row_feature in self.features_lembrame:
-                switch = self.listbox_rows[row_feature][Features.COL_SWITCH]
-                switch.set_active(True)
-            self.features_lembrame = []
 
     def add_feature_switch(self, feature, box):
         """ Add a switch so the user can activate/deactivate the feature """
@@ -429,23 +390,6 @@ class Features(GtkBaseBox):
             else:
                 self.settings.set("feature_lemp", False)
 
-    def ask_lembrame(self):
-        """ Asks user for lembrame credentials """
-        if self.settings.get("feature_lembrame"):
-            dlg = LembrameDialog(
-                self.get_main_window(),
-                self.gui_dir)
-
-            response = dlg.run()
-
-            if response == Gtk.ResponseType.APPLY:
-                logging.debug("Saving Lembrame credentials")
-                self.settings.set(
-                    'lembrame_credentials',
-                    dlg.get_credentials())
-
-            dlg.destroy()
-
     def store_switches(self):
         """ Store current feature selections """
         for feature in self.features:
@@ -461,7 +405,6 @@ class Features(GtkBaseBox):
         self.store_switches()
         self.show_disclaimer_messages()
         self.ask_nginx()
-        self.ask_lembrame()
 
         self.listbox_rows = {}
 

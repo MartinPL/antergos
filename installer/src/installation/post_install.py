@@ -46,8 +46,6 @@ from misc.run_cmd import call, chroot_call
 
 import parted3.fs_module as fs
 
-from lembrame.lembrame import Lembrame
-
 # When testing, no _() is available
 try:
     _("")
@@ -839,14 +837,6 @@ class PostInstallation():
                     bashrc.write('if [ -e ~/.bashrc.aliases ] ; then\n')
                     bashrc.write('   source ~/.bashrc.aliases\n')
                     bashrc.write('fi\n')
-
-        # Overwrite settings with Lembrame if enabled
-        # TODO: Rethink this function because we need almost everything but some things for Lembrame
-        if self.settings.get("feature_lembrame"):
-            logging.debug("Overwriting configs from Lembrame")
-            self.events.add('info', _("Overwriting configs from Lembrame"))
-            lembrame = Lembrame(self.settings)
-            lembrame.overwrite_content()
 
         # Fix #1116 (root folder permissions)
         path = os.path.join(DEST_DIR, 'root')

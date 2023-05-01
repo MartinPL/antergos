@@ -55,6 +55,7 @@ sudo
 pyalpm
 geoip2-database
 python-packaging
+python-pyparted
 python-defusedxml
 python-feedparser
 python-geoip2

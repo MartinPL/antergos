@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-install_aur() {
+make_aur() {
     cd /tmp
     git clone https://aur.archlinux.org/$1.git
     chown -R nobody $1
     cd $1
     sudo -u nobody makepkg
-    pacman -U *.tar.zst --noconfirm
+    mv  -v /tmp/$1/*.pkg.tar.zst /home/custompkgs/
 }
 
 echo "Chrooted in the new system, running as $(whoami)"
@@ -49,14 +49,26 @@ locale-gen
 # makepkg
 pacman -Sy
 pacman -S devtools git --noconfirm
+mkdir /home/custompkgs/
 
 # Install python-bugsnag
 pacman -S python-setuptools python-build python-installer python-wheel --noconfirm
-install_aur "python-bugsnag"
+make_aur "python-bugsnag"
 
-# Install python-pyparted
-pacman -S pkg-config gcc --noconfirm
-install_aur "python-pyparted"
+# pamac-aur
+pacman -S itstool vala asciidoc meson ninja gobject-introspection libappindicator-gtk3 dbus-glib vte3 archlinux-appstream-data --noconfirm
+make_aur "libpamac-aur"
+pacman -U /home/custompkgs/libpamac-aur-*.pkg.tar.zst --noconfirm
+make_aur "pamac-aur"
+
+# add local repo and install all his packages
+echo '
+[custompkgs]
+Server = file:///home/custompkgs
+' >> /etc/pacman.conf
+repo-add /home/custompkgs/custompkgs.db.tar.gz /home/custompkgs/*.pkg.tar.zst
+pacman -Sy
+pacman -S `pacman -Slq custompkgs` --noconfirm
 
 # Install Cnchi
 cd /

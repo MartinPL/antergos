@@ -105,6 +105,7 @@
                 <pkgname>xorg-server</pkgname>
                 <pkgname>xorg-xinit</pkgname>
                 <pkgname>xorg-xkill</pkgname>
+                <pkgname>pamac-aur</pkgname>
             </packages>
         </edition>
 

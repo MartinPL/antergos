@@ -175,6 +175,11 @@ class Download():
                                 dst_xz_cache_path,
                                 dst_path,
                                 os_error)
+            
+            # We don't need to download files from local repo
+            for url in element['urls']:
+                if url and "file:///" in url:
+                    needs_to_download = False
 
             if needs_to_download and not self.download_package(element, dst_path):
                 # None of the mirror urls works.

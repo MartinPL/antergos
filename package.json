@@ -2,7 +2,7 @@
   "name": "antergos",
   "scripts": {
     "build": "npm run build-installer && npm run build-iso",
-    "build-installer": "cd installer && makepkg -f && cp cnchi-1-1-any.pkg.tar.zst ../iso/antergos/airootfs",
+    "build-installer": "cd installer && makepkg -f && cp cnchi-1-1-any.pkg.tar.zst ../iso/antergos/airootfs/home/custompkgs/",
     "build-iso": "cd iso && ./build.sh --build-iso",
     "bigger-tmp": "sudo mount -o remount,size=12G /tmp/"
   }

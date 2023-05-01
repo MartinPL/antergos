@@ -49,7 +49,6 @@ locale-gen
 # makepkg
 pacman -Sy
 pacman -S devtools git --noconfirm
-mkdir /home/custompkgs/
 
 # Install python-bugsnag
 pacman -S python-setuptools python-build python-installer python-wheel --noconfirm
@@ -69,10 +68,6 @@ Server = file:///home/custompkgs
 repo-add /home/custompkgs/custompkgs.db.tar.gz /home/custompkgs/*.pkg.tar.zst
 pacman -Sy
 pacman -S `pacman -Slq custompkgs` --noconfirm
-
-# Install Cnchi
-cd /
-pacman -U --noconfirm cnchi-1-1-any.pkg.tar.zst
 
 # Cnchi Autostart
 cp /usr/share/applications/cnchi.desktop /home/antergos/.config/autostart

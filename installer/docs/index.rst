@@ -21,7 +21,6 @@ Welcome to Cnchi's documentation!
    hardware
    info
    installation
-   logging_utils
    main_window
    misc
    proxy

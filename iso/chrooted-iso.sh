@@ -50,10 +50,6 @@ locale-gen
 pacman -Sy
 pacman -S devtools git --noconfirm
 
-# Install python-bugsnag
-pacman -S python-setuptools python-build python-installer python-wheel --noconfirm
-make_aur "python-bugsnag"
-
 # pamac-aur
 pacman -S itstool vala asciidoc meson ninja gobject-introspection libappindicator-gtk3 dbus-glib vte3 archlinux-appstream-data --noconfirm
 make_aur "libpamac-aur"

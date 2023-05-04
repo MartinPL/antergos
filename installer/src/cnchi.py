@@ -58,17 +58,7 @@ from misc.run_cmd import call
 import show_message as show
 import info
 
-from logging_utils import ContextFilter
 import logging_color
-
-#try:
-#    from bugsnag.handlers import BugsnagHandler
-#    import bugsnag
-#    BUGSNAG_ERROR = None
-#except ImportError as err:
-#    BUGSNAG_ERROR = str(err)
-
-BUGSNAG_ERROR = "Bugsnag disabled. Makes requests raise several exceptions. Need to check what is wrong"
 
 # When testing, no _() is available
 try:
@@ -282,10 +272,7 @@ class CnchiInit():
             log_level = logging.INFO
 
         logger.setLevel(log_level)
-
-        context_filter = ContextFilter()
-        logger.addFilter(context_filter.filter)
-
+        
         datefmt = "%Y-%m-%d %H:%M:%S"
 
         fmt = "%(asctime)s [%(levelname)-7s] %(message)s  (%(filename)s:%(lineno)d)"
@@ -327,31 +314,6 @@ class CnchiInit():
             stream_handler.setLevel(log_level)
             stream_handler.setFormatter(color_formatter)
             logger.addHandler(stream_handler)
-       
-
-        if not BUGSNAG_ERROR:
-            # Bugsnag logger
-            bugsnag_api = context_filter.api_key
-            if bugsnag_api is not None:
-                bugsnag.configure(
-                    api_key=bugsnag_api,
-                    app_version=info.CNCHI_VERSION,
-                    project_root='/usr/share/cnchi/cnchi',
-                    release_stage=info.CNCHI_RELEASE_STAGE)
-                bugsnag_handler = BugsnagHandler(api_key=bugsnag_api)
-                bugsnag_handler.setLevel(logging.WARNING)
-                bugsnag_handler.setFormatter(formatter)
-                bugsnag_handler.addFilter(context_filter.filter)
-                bugsnag.before_notify(
-                    context_filter.bugsnag_before_notify_callback)
-                logger.addHandler(bugsnag_handler)
-                logging.info(
-                    "Sending Cnchi log messages to bugsnag server (using python-bugsnag).")
-            else:
-                logging.warning(
-                    "Cannot read the bugsnag api key, logging to bugsnag is not possible.")
-        else:
-            logging.warning(BUGSNAG_ERROR)
 
     @staticmethod
     def check_gtk_version():
@@ -469,7 +431,7 @@ class CnchiInit():
             "-r", "--logresources", help=_("Logs resources usage (for debugging purposes)"),
             action="store_true")
         parser.add_argument(
-            "-s", "--logserver", help=_("Log server (deprecated, always uses bugsnag)"),
+            "-s", "--logserver", help=_("Log server"),
             nargs='?')
         parser.add_argument(
             "-t", "--no-tryit", help=_("Disables first screen's 'try it' option"),

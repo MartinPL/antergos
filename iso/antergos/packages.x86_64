@@ -64,6 +64,3 @@ python-mako
 python-maxminddb
 usbutils
 haveged
-
-# python-bugsnag
-python-webob

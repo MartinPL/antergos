@@ -42,7 +42,6 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 from pages.gtkbasebox import GtkBaseBox
-from logging_utils import ContextFilter
 
 import geoip
 
@@ -153,8 +152,6 @@ class Location(GtkBaseBox):
         self.forward_button.set_sensitive(True)
 
         self.show_all()
-
-        self.settings.set('install_id', self.get_and_save_install_id())
 
     def load_locales(self):
         """ Load all locales from locales.xml """
@@ -315,12 +312,6 @@ class Location(GtkBaseBox):
         self.settings.set('country_name', country_name)
         self.settings.set('country_code', country_code)
         return True
-
-    @staticmethod
-    def get_and_save_install_id():
-        """ Obtains and saves an installation ID for future reference """
-        context_filter = ContextFilter()
-        return context_filter.get_and_save_install_id(is_location_screen=True)
 
 
 # When testing, no _() is available

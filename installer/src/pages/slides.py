@@ -45,8 +45,6 @@ import misc.extra as misc
 
 from pages.gtkbasebox import GtkBaseBox
 
-from logging_utils import ContextFilter
-
 # When testing, no _() is available
 try:
     _("")
@@ -298,9 +296,6 @@ class Slides(GtkBaseBox):
 
     def installation_finished(self):
         """ Installation finished """
-        log_util = ContextFilter()
-        log_util.send_install_result("True")
-
         self.stop_slideshow = True
 
         try:
@@ -335,16 +330,5 @@ class Slides(GtkBaseBox):
         # Empty the events queue
         self.empty_queue()
 
-        log_util = ContextFilter()
-        log_util.send_install_result("False")
-        if log_util.have_install_id:
-            # Add install id to error message
-            # (we can lookup logs on bugsnag by the install id)
-            tpl = _(
-                'Please reference the following number when reporting this error: ')
-            error_message = '{0}\n{1}{2}'.format(
-                error, tpl, log_util.install_id)
-        else:
-            error_message = error
+        show.fatal_error(self.get_main_window(), error)
 
-        show.fatal_error(self.get_main_window(), error_message)

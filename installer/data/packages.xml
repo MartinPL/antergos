@@ -37,6 +37,7 @@
                 <pkgname>wireless_tools</pkgname>
                 <pkgname>mkinitcpio</pkgname>
                 <pkgname>linux</pkgname>
+                <pkgname>linux-firmware</pkgname>
             </packages>
         </edition>
 

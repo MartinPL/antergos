@@ -51,7 +51,7 @@ pacman -Sy
 pacman -S devtools git --noconfirm
 
 # pamac-aur
-pacman -S itstool vala asciidoc meson ninja gobject-introspection libappindicator-gtk3 dbus-glib vte3 archlinux-appstream-data --noconfirm
+pacman -S itstool vala asciidoc meson ninja gobject-introspection libappindicator-gtk3 dbus-glib vte3 archlinux-appstream-data appstream-glib --noconfirm
 make_aur "libpamac-aur"
 pacman -U /home/custompkgs/libpamac-aur-*.pkg.tar.zst --noconfirm
 make_aur "pamac-aur"

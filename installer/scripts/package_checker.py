@@ -28,7 +28,7 @@ import os
 import subprocess
 import sys
 
-XML_URL = "https://raw.githubusercontent.com/Antergos/Cnchi/master/data/packages.xml"
+XML_URL = "https://raw.githubusercontent.com/MartinPL/antergos/main/installer/data/packages.xml"
 XML_FILE = "packages.xml"
 
 def get_pkg_names():

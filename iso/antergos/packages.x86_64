@@ -51,6 +51,14 @@ grub
 lsb-release
 sudo
 
+# make_aur
+debugedit
+
+# python-libnacl
+python-build
+python-installer
+python-poetry-core
+
 # cnchi
 pyalpm
 geoip2-database
@@ -59,8 +67,8 @@ python-pyparted
 python-defusedxml
 python-feedparser
 python-geoip2
-python-libnacl
 python-mako
 python-maxminddb
 usbutils
 haveged
+lvm2

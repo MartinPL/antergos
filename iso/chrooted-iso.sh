@@ -56,6 +56,9 @@ make_aur "libpamac-aur"
 pacman -U /home/custompkgs/libpamac-aur-*.pkg.tar.zst --noconfirm
 make_aur "pamac-aur"
 
+# cnchi
+make_aur "python-libnacl"
+
 # add local repo and install all his packages
 echo '
 [custompkgs]
